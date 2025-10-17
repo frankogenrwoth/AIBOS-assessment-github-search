@@ -54,73 +54,25 @@ class RepositorySerializer(serializers.ModelSerializer):
 
         owner_obj = getattr(instance, "owner", None)
         owner = {
-            "login": getattr(
-                owner_obj, "login", getattr(instance, "owner_login", None)
-            ),
-            "id": getattr(owner_obj, "id", getattr(instance, "owner_id", None)),
-            "node_id": getattr(
-                owner_obj, "node_id", getattr(instance, "owner_node_id", None)
-            ),
-            "avatar_url": getattr(
-                owner_obj, "avatar_url", getattr(instance, "owner_avatar_url", None)
-            ),
-            "gravatar_id": getattr(
-                owner_obj, "gravatar_id", getattr(instance, "owner_gravatar_id", "")
-            ),
-            "url": getattr(owner_obj, "url", getattr(instance, "owner_api_url", None)),
-            "html_url": getattr(
-                owner_obj, "html_url", getattr(instance, "owner_html_url", None)
-            ),
-            "followers_url": getattr(
-                owner_obj,
-                "followers_url",
-                getattr(instance, "owner_followers_url", None),
-            ),
-            "following_url": getattr(
-                owner_obj,
-                "following_url",
-                getattr(instance, "owner_following_url", None),
-            ),
-            "gists_url": getattr(
-                owner_obj, "gists_url", getattr(instance, "owner_gists_url", None)
-            ),
-            "starred_url": getattr(
-                owner_obj, "starred_url", getattr(instance, "owner_starred_url", None)
-            ),
-            "subscriptions_url": getattr(
-                owner_obj,
-                "subscriptions_url",
-                getattr(instance, "owner_subscriptions_url", None),
-            ),
-            "organizations_url": getattr(
-                owner_obj,
-                "organizations_url",
-                getattr(instance, "owner_organizations_url", None),
-            ),
-            "repos_url": getattr(
-                owner_obj, "repos_url", getattr(instance, "owner_repos_url", None)
-            ),
-            "events_url": getattr(
-                owner_obj, "events_url", getattr(instance, "owner_events_url", None)
-            ),
-            "received_events_url": getattr(
-                owner_obj,
-                "received_events_url",
-                getattr(instance, "owner_received_events_url", None),
-            ),
-            "type": getattr(owner_obj, "type", getattr(instance, "owner_type", None)),
-            "user_view_type": getattr(
-                owner_obj,
-                "user_view_type",
-                getattr(instance, "owner_user_view_type", None),
-            ),
-            "site_admin": bool(
-                getattr(
-                    owner_obj,
-                    "site_admin",
-                    getattr(instance, "owner_site_admin", False),
-                )
-            ),
+            "login": owner_obj.get("login"),
+            "id": owner_obj.get("id"),
+            "node_id": owner_obj.get("node_id"),
+            "avatar_url": owner_obj.get("avatar_url"),
+            "gravatar_id": owner_obj.get("gravatar_id"),
+            "url": owner_obj.get("url"),
+            "html_url": owner_obj.get("html_url"),
+            "followers_url": owner_obj.get("followers_url"),
+            "following_url": owner_obj.get("following_url"),
+            "gists_url": owner_obj.get("gists_url"),
+            "starred_url": owner_obj.get("starred_url"),
+            "subscriptions_url": owner_obj.get("subscriptions_url"),
+            "organizations_url": owner_obj.get("organizations_url"),
+            "repos_url": owner_obj.get("repos_url"),
+            "events_url": owner_obj.get("events_url"),
+            "received_events_url": owner_obj.get("received_events_url"),
+            "type": owner_obj.get("type"),
+            "user_view_type": owner_obj.get("user_view_type"),
+            "site_admin": bool(owner_obj.get("site_admin", False)),
         }
 
         name = instance.data.get("name", instance.name)
