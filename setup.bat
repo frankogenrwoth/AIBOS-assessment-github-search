@@ -11,6 +11,6 @@ start "Backend" ^
 @REM Start frontend in a new terminal
 start "Frontend" ^
     /D "%CURRENT_DIR%frontend" ^
-    "%ComSpec%" /k npm start
+    "%ComSpec%" /k npm run dev
 
 
