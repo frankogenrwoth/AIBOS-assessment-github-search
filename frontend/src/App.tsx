@@ -14,12 +14,14 @@ function App() {
   const [repositories, setRepositories] = useState<Repository[]>([]);
   const [filter, setFilter] = useState('all');
   const [sort, setSort] = useState('best');
+  const [loading, setLoading] = useState(false);
   const [orderedRepositories, setOrderedRepositories] = useState<Repository[]>([]);
 
   useEffect(() => {
     fetch('http://localhost:8000/api/v1/repositories', {credentials: 'include'})
       .then((response) => response.json())
       .then((data) => { 
+        setLoading(true);
         setRepositories(data);
         setCount(data.length);
 
@@ -40,7 +42,8 @@ function App() {
           setOrderedRepositories((prev) => prev.sort((a: Repository, b: Repository) => b.open_issues - a.open_issues));
         } else if (sort == 'forks') {
           setOrderedRepositories((prev) => prev.sort((a: Repository, b: Repository) => b.forks - a.forks));
-        }
+        };
+        setLoading(false);
         
       })
       .catch((error) => console.error('Error fetching repositories:', error))
@@ -80,10 +83,12 @@ function App() {
   }, [orderedRepositories]);
 
   function searchKeyword() {
+    setLoading(true);
     fetch(`http://localhost:8000/api/v1/search?q=${searchTerm}`, { credentials: 'include' })
       .then((response) => response.json())
       .then((data) => { setRepositories(data); setCount(data.length); setNewSearch(true); })
-      .catch((error) => console.error('Error fetching repositories:', error))
+      .catch((error) => console.error('Error fetching repositories:', error));
+    setLoading(false);
   }
 
   return (
@@ -162,7 +167,10 @@ function App() {
         </div>
 
         <div className="container">
+          {loading && <><span>Loading repositories</span></>}
+          {!loading && 
           <RepositoriesList repositories={orderedRepositories.slice((currentPage - 1) * paginationSize, currentPage * paginationSize)} />
+          }
         </div>
 
         <div className="pagination">
