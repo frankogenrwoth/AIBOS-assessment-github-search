@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Repository(models.Model):
-    name = models.CharField(max_length=255, blank=True)
-    data = models.JSONField()
+    name = models.CharField(max_length=255, blank=True, unique=True)
+    data = models.JSONField(default=dict)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
@@ -21,5 +21,5 @@ class Repository(models.Model):
         """
         Override save to ensure 'name' is always set from 'full_name' before saving.
         """
-        self.name = getattr(self, 'full_name', self.name)
+        self.name = getattr(self, "full_name", self.name)
         return super().save(*args, **kwargs)

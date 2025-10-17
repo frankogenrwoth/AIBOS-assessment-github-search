@@ -1,4 +1,4 @@
-from huggingface_hub import Repository
+from api.models import Repository
 from rest_framework import serializers
 
 
@@ -7,6 +7,7 @@ class RepositorySerializer(serializers.ModelSerializer):
         model = Repository
         fields = ["id", "name", "url", "description", "created_at", "updated_at"]
 
+    @staticmethod
     def _isoformat_or_none(dt):
         if not dt:
             return None
@@ -122,7 +123,7 @@ class RepositorySerializer(serializers.ModelSerializer):
             ),
         }
 
-        name = getattr(instance, "name", None)
+        name = instance.data.get("name", instance.name)
         owner_login = owner["login"]
         full_name = getattr(
             instance,
@@ -179,10 +180,14 @@ class RepositorySerializer(serializers.ModelSerializer):
             "notifications_url": getattr(instance, "notifications_url", None),
             "labels_url": getattr(instance, "labels_url", None),
             "releases_url": getattr(instance, "releases_url", None),
-            "created_at": self._isoformat_or_none(getattr(instance, "created_at", None)),
-            "updated_at": self._isoformat_or_none(getattr(instance, "updated_at", None)),
+            "created_at": self._isoformat_or_none(
+                getattr(instance, "created_at", None)
+            ),
+            "updated_at": self._isoformat_or_none(
+                getattr(instance, "updated_at", None)
+            ),
             "pushed_at": self._isoformat_or_none(getattr(instance, "pushed_at", None)),
-            "pushed_at": self._iso(getattr(instance, "pushed_at", None)),
+            "pushed_at": self._isoformat_or_none(getattr(instance, "pushed_at", None)),
             "git_url": getattr(instance, "git_url", None),
             "ssh_url": getattr(instance, "ssh_url", None),
             "clone_url": getattr(instance, "clone_url", None),
