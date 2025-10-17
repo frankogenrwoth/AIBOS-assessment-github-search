@@ -1,4 +1,6 @@
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
+from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from django.utils import timezone
@@ -89,3 +91,33 @@ class RepositorySearchView(APIView):
         print(serializer.data)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class RepositoryViewSet(ViewSet):
+    serializer_class = RepositorySerializer
+
+    def get_queryset(self):
+        return Repository.objects.all()
+
+    def list(self, request):
+        repositories = self.get_queryset()
+        serializer = self.serializer_class(repositories, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, pk=None):
+        queryset = self.get_queryset()
+        repository = get_object_or_404(queryset, pk=pk)
+        serializer = self.serializer_class(repository)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def create(self, request):
+        return
+
+    def update(self, request, pk=None):
+        return
+
+    def partial_update(self, request, pk=None):
+        return
+
+    def destroy(self, request, pk=None):
+        return

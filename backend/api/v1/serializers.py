@@ -5,7 +5,7 @@ from rest_framework import serializers
 class RepositorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Repository
-        fields = ["id", "name", "url", "description", "created_at", "updated_at"]
+        fields = "__all__"
 
     @staticmethod
     def _isoformat_or_none(dt):

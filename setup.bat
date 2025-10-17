@@ -12,5 +12,3 @@ start "Backend" ^
 start "Frontend" ^
     /D "%CURRENT_DIR%frontend" ^
     "%ComSpec%" /k npm run dev
-
-
