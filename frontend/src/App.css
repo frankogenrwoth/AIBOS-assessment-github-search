@@ -169,6 +169,21 @@ option {
   font-size: small;
   padding: 2px 12px;
   color: #f0f0f0;
+  border: none;
+  outline: none;
+}
+
+.pagination-controls button:hover {
+  background-color: #007bff;
+  cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+  height: 2em;
+  font-size: small;
+  padding: 2px 12px;
+  color: #f0f0f0;
+  background-color: grey;
 }
 
 

@@ -6,6 +6,9 @@ import RepositoriesList from './components/RepositoriesList';
 function App() {
   const [count, setCount] = useState(0);
 
+  const [paginationSize, setPaginationSize] = useState(20);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const [repositories, setRepositories] = useState<Repository[]>([])
 
   useEffect(() => {
@@ -14,6 +17,10 @@ function App() {
       .then((data) => { setRepositories(data); setCount(data.length) })
       .catch((error) => console.error('Error fetching repositories:', error))
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [paginationSize]);
 
   return (
       <div className="wrapper">
@@ -45,6 +52,11 @@ function App() {
               step={1}
               defaultValue={20}
               aria-label="Repositories per page"
+              onChange={
+                (event) => {
+                  setPaginationSize(Number(event.target.value));
+                }
+              }
               />
             </div>
           </div>
@@ -55,17 +67,17 @@ function App() {
         </div>
 
         <div className="container">
-          <RepositoriesList repositories={repositories} />
+          <RepositoriesList repositories={repositories.slice((currentPage - 1) * paginationSize, currentPage * paginationSize)} />
         </div>
 
         <div className="pagination">
           <div className="pagination-controls">
-            <button className="prev" disabled>Previous</button>
-            <button className="next" disabled>Next</button>
+            <button className="prev" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
+            <button className="next" disabled={currentPage === Math.ceil(count / paginationSize)} onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
           </div>
 
           <div className="pagination-info">
-            Page <span className="current-page">1</span> of <span className="total-pages">{Math.ceil(count / 20)}</span>
+            Page <span className="current-page">{currentPage}</span> of <span className="total-pages">{Math.ceil(count / paginationSize)}</span>
           </div>
         </div>
       </div>
