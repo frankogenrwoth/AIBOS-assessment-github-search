@@ -1,0 +1,11 @@
+
+# backend/.gitignore
+*.pyc
+
+.venv
+.env
+db.sqlite3
+backend/__pycache__/
+
+api/migrations
+api/__pycache__/
