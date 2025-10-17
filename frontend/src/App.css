@@ -137,9 +137,107 @@ option {
 
 
 .search-result {
-  text-align: left;
+  display: flex;
+  justify-content: space-between;
   padding-left: 0.5rem;
   flex: 0 0 auto;
+}
+
+.filter {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.selected-filter-options {
+  display: flex;
+  gap: 1rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Container for chips (optional) */
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Keep input accessible but hidden */
+.filter-chip-input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* Base chip style on the label */
+.filter-chip-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 9999px;
+  background-color: #fff;
+  color: #333;
+  font-size: 0.875rem;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.filter-chip-label:hover {
+  background-color: #f5f9ff;
+  border-color: #cfe7ff;
+}
+
+/* Focus ring via the hidden input */
+.filter-chip-input:focus + .filter-chip-label {
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.35);
+}
+
+/* Selected state */
+.filter-chip-input:checked + .filter-chip-label {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+.filter-chip-input:checked + .filter-chip-label:hover {
+  background-color: #0a6fe4;
+  border-color: #0a6fe4;
+}
+
+/* Disabled state */
+.filter-chip-input:disabled + .filter-chip-label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.filter-button {
+  cursor: pointer;
+}
+
+.filter-options {
+  position: absolute;
+  bottom: 100%;
+  background-color: #007bff;
+  min-height: 200px;
+  border-radius: 12px;
+}
+
+.selected-filter-options span {
+  border-radius: 12px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 2px 1rem;
+  font-size: small;
 }
 
 .container {

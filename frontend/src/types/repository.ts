@@ -107,5 +107,5 @@ export interface Repository {
   open_issues: number;
   watchers: number;
   default_branch: string;
-  score?: number;
+  score: number;
 }
