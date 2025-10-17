@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import type { Repository } from './types';
 import RepositoriesList from './components/RepositoriesList';
