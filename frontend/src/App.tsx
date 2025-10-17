@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import type { Repository } from './types';
+import RepositoriesList from './components/RepositoriesList';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -12,52 +11,59 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:8000/api/v1/repositories', {credentials: 'include'})
       .then((response) => response.json())
-      .then((data) => setRepositories(data))
+      .then((data) => { setRepositories(data); setCount(data.length) })
       .catch((error) => console.error('Error fetching repositories:', error))
   }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <div className="wrapper">
+        <div className="header">
+          <div className="search">
+            <div className="search-box">
+              <input type="text" placeholder="Search repositories..." />
+              <button>Search</button>
+            </div>
+            <div className="result-count">{count} results found in <span className="search-time">"your search term"</span></div>            
+          </div>
 
-      {repositories.length > 0 ? (
-        <div>
-          <h2>Repositories:</h2>
-          <ul>
-            {repositories.map((repo) => (
-              <li key={repo?.id}>
-                <h3>{repo?.name}</h3>
-                <p>{repo?.description}</p>
-                <a href={repo?.url} target="_blank" rel="noopener noreferrer">
-                  Visit Repository
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className="action">
+            <div className="sort">
+              <label htmlFor="sort-by">Sort by:</label>
+              <select id="sort-by" defaultValue="best" aria-label="Sort repositories">
+                <option value="best">Best match</option>
+                <option value="stars">Most stars</option>
+              </select>
+            </div>
+            <div className="pagination-size">
+              <label htmlFor="per-page">Per page:</label>
+              <input
+              id="per-page"
+              type="number"
+              min={1}
+              max={100}
+              step={1}
+              defaultValue={20}
+              aria-label="Repositories per page"
+              />
+            </div>
+          </div>
         </div>
-      ) : (
-        <p>Loading repositories...</p>
-      )}
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+        <div className="container">
+          <RepositoriesList repositories={repositories} />
+        </div>
+
+        <div className="pagination">
+          <div className="pagination-controls">
+            <button className="prev" disabled>Previous</button>
+            <button className="next" disabled>Next</button>
+          </div>
+
+          <div className="pagination-info">
+            Page <span className="current-page">1</span> of <span className="total-pages">1</span>
+          </div>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
   )
 }
 
