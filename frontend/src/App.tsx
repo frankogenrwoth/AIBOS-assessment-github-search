@@ -105,7 +105,7 @@ function App() {
           <div className="action">
             <div className="sort">
               <label htmlFor="sort-by">Sort by:</label>
-              <select className="form-control select-wrapper" id="sort-by" defaultValue="best" aria-label="Sort repositories" onChange={() => {}}>
+              <select className="form-control select-wrapper" id="sort-by" defaultValue="best" aria-label="Sort repositories" onChange={() => {setSort((document.getElementById('sort-by') as HTMLSelectElement).value)}}>
                 <option value="best">Best match</option>
                 <option value="stars">Most stars</option>
                 <option value="watchers">most watchers</option>
