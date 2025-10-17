@@ -2,7 +2,7 @@
 
  A small full-stack app that lets you search GitHub repositories (via the GitHub Search API), caches the results in a local SQLite database, and displays them in a React + Vite frontend.
 
- This repository is an assessment/sample project demonstrating a lightweight Django REST backend that shapes and persists GitHub repository objects and a TypeScript React frontend that provides searching, filtering, sorting and client-side pagination.
+ This mono repository is an assessment/sample project demonstrating a lightweight Django REST backend that shapes and persists GitHub repository objects and a TypeScript React frontend that provides searching, filtering, sorting and client-side pagination.
 
  ## Features
  - Search GitHub repositories using the GitHub Search API (endpoint mirrors GitHub-style query parameters).
