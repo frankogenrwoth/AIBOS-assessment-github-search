@@ -9,6 +9,9 @@ interface Props {
 
 
 export const RepositoryItem: React.FC<Props> = ({ repo }) => {
+    const lang = repo.language ?? '';
+    const langColor = (languageColors[lang] && languageColors[lang].color) ? languageColors[lang].color : 'transparent';
+
     return (
     <article className="repo-item">
         <div className="repo-content">
@@ -21,7 +24,7 @@ export const RepositoryItem: React.FC<Props> = ({ repo }) => {
             </div>
             <div className="repo-stats">
                 <div className="repo-language">
-                    <span className="repo-language-code" style={{ backgroundColor: ((languageColors[repo.language ? repo.language : "Just"].color) ? languageColors[repo.language ? repo.language : "Just"].color : 'transparent') }}></span>
+                    <span className="repo-language-code" style={{ backgroundColor: langColor }}></span>
                     <span>{repo.language ?? '—'}</span>
                 </div>
                 <div className="repo-stars">

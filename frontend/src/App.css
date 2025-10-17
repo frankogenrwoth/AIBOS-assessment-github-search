@@ -6,6 +6,8 @@
 }
 
 
+/* no-op wrapper removed; styles applied directly to .wrapper */
+
 body {
   font-family: system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -15,26 +17,42 @@ body {
   box-sizing: border-box;
   background-color: #f0f0f0;
   color: #333;
+  /* make the app take the full viewport so we can pin header/footer */
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
 .wrapper {
+  width: 100%;
   max-width: 800px;
+  height: 80vh; /* fixed height so inner list can scroll */
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem 1.5rem;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
+  /* keep header visible and not scroll with list */
+  flex: 0 0 auto;
 }
 
 .header div {
@@ -121,15 +139,23 @@ option {
 .search-result {
   text-align: left;
   padding-left: 0.5rem;
+  flex: 0 0 auto;
 }
+
+.container {
+  /* make container grow and host the scrollable list */
+  flex: 1 1 auto;
+  min-height: 0; /* allow children to collapse and enable scrolling */
+  display: flex;
+  flex-direction: column;
+}
+
 .pagination {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
   justify-content: space-between;
-  align-items: center;
   gap: 1rem;
+  align-items: center;
+  flex: 0 0 auto; /* keep pagination/footer visible */
 }
 
 .pagination div {
@@ -138,11 +164,22 @@ option {
   gap: 1rem;
 }
 
+.pagination-controls button {
+  height: 2em;
+  font-size: small;
+  padding: 2px 12px;
+  color: #f0f0f0;
+}
+
 
 .repo-list {
   display: flex;
+  overflow: auto;
+  /* fill available vertical space inside .container and scroll when needed */
+  flex: 1 1 auto;
   flex-direction: column;
   gap: 1rem;
+  padding-right: 0.5rem; /* give some breathing space for scrollbar */
 }
 
 .repo-item {
@@ -183,7 +220,9 @@ option {
   font-size: 1rem;
   color: #555;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* type: ignore */
+  /* preferred modern property */
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

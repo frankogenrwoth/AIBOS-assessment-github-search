@@ -65,7 +65,7 @@ function App() {
           </div>
 
           <div className="pagination-info">
-            Page <span className="current-page">1</span> of <span className="total-pages">1</span>
+            Page <span className="current-page">1</span> of <span className="total-pages">{Math.ceil(count / 20)}</span>
           </div>
         </div>
       </div>
