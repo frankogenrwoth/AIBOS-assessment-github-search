@@ -23,13 +23,13 @@ function App() {
               <input type="text" placeholder="Search repositories..." />
               <button>Search</button>
             </div>
-            <div className="result-count">{count} results found in <span className="search-time">"your search term"</span></div>            
+            
           </div>
 
           <div className="action">
             <div className="sort">
               <label htmlFor="sort-by">Sort by:</label>
-              <select id="sort-by" defaultValue="best" aria-label="Sort repositories">
+              <select className="form-control select-wrapper" id="sort-by" defaultValue="best" aria-label="Sort repositories">
                 <option value="best">Best match</option>
                 <option value="stars">Most stars</option>
               </select>
@@ -39,6 +39,7 @@ function App() {
               <input
               id="per-page"
               type="number"
+              className='form-control'
               min={1}
               max={100}
               step={1}
@@ -47,6 +48,10 @@ function App() {
               />
             </div>
           </div>
+        </div>
+
+        <div className="search-result">
+        <div className="result-count">{count} results found in <span className="search-time">"your search term"</span></div>            
         </div>
 
         <div className="container">

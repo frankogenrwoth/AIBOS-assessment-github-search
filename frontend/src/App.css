@@ -43,6 +43,85 @@ body {
   gap: 1rem;
 }
 
+.search {
+    display: block;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.search-box {
+  padding: 0.5rem 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  color: #333;
+  font-size: 1rem;
+  background-color: transparent;
+}
+
+.search-box button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: .875rem;
+}
+
+.search-box button:focus {
+  outline: none;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: white;
+  padding: 10px 40px 10px 12px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+}
+
+.form-control {
+  padding: 0.5rem 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.form-control:focus {
+  outline: none;
+}
+
+option {
+  border-radius: 8px;
+  /* ⚠️ Might not show in most browsers */
+  margin-top: 6px;
+  /* ⚠️ Usually ignored */
+  padding: 8px 10px;
+}
+
+::placeholder {
+  color: #aaa;
+}
+
+
+.search-result {
+  text-align: left;
+  padding-left: 0.5rem;
+}
 .pagination {
   display: flex;
   justify-content: center;
