@@ -116,6 +116,19 @@ body {
   color: #777;
 }
 
+.repo-language {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.repo-language-code {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
 .repo-action button {
   height: 2em;
   font-size: small;

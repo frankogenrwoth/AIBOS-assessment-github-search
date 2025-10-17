@@ -1,12 +1,15 @@
 import React from 'react';
-import type { Repository } from '../types';
+import { type Repository } from '../types';
+import { languageColors } from '../data';
 
 interface Props {
   repo: Repository;
 }
 
+
+
 export const RepositoryItem: React.FC<Props> = ({ repo }) => {
-  return (
+    return (
     <article className="repo-item">
         <div className="repo-content">
             <div className="repo-ownership">
@@ -18,7 +21,7 @@ export const RepositoryItem: React.FC<Props> = ({ repo }) => {
             </div>
             <div className="repo-stats">
                 <div className="repo-language">
-                    <span className="repo-language-code"></span>
+                    <span className="repo-language-code" style={{ backgroundColor: ((languageColors[repo.language ? repo.language : "Just"].color) ? languageColors[repo.language ? repo.language : "Just"].color : 'transparent') }}></span>
                     <span>{repo.language ?? '—'}</span>
                 </div>
                 <div className="repo-stars">
